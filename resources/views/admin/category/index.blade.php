@@ -29,8 +29,8 @@
 							<tr>
 								<th>Category Id </th>
 								<th>Category Name</th>
-                <th>Created At</th>
-                <th>Action</th>
+								<th>Created At</th>
+								<th>Action</th>
 								 
 							</tr>
 						</thead>
@@ -44,9 +44,8 @@
 		<td>{{ $item->created_at->diffForHumans()}}</td>
 		 
 		<td>
- <a href="" class="btn btn-info" title="Edit Data"><i class="fa fa-pencil"></i> </a>
- <a href="" class="btn btn-danger" title="Delete Data" id="delete">
- 	<i class="fa fa-trash"></i></a>
+ <a href="{{ route('category.edit',$item->id) }}" class="btn btn-info" >Edit </a>
+ <a href="{{ route('category.delete',$item->id) }}" class="btn btn-danger" >Delete</i></a>
 		</td>
 							 
 	 </tr>
@@ -54,6 +53,8 @@
 						</tbody>
 						 
 					  </table>
+
+            {{$category->links()}}
 					</div>
 				</div>
 				<!-- /.box-body -->

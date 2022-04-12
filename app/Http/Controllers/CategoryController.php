@@ -13,7 +13,7 @@ class CategoryController extends Controller
     Public function Allcat(){
 
 
-        $category = Category::latest()->get();
+        $category = Category::latest()->paginate(5);
         return view('admin.category.index',compact('category'));
 
 
@@ -31,7 +31,7 @@ class CategoryController extends Controller
          Category::insert([
             'category_name' => $request->category_name,
             'user_id' => Auth::user()->id,
- 	     'created_at' => Carbon::now(),
+ 	        'created_at' => Carbon::now(),
     
             ]);
             $notification = array(
@@ -41,7 +41,43 @@ class CategoryController extends Controller
     
             return redirect()->back()->with($notification);
         } // end method 
+
+
+        public function CategoryEdit($id){
+            $category = Category::findOrFail($id);
+            return view('admin.category.category_edit',compact('category'));
     
+        }  // end method
+    
+        public function CategoryUpdate(Request $request ,$id){
+            Category::findOrFail($id)->update([
+            'category_name' => $request->category_name,
+            
+    
+            ]);
+    
+            $notification = array(
+                'message' => 'Category Updated Successfully',
+                'alert-type' => 'success'
+            );
+    
+            return redirect()->route('all.category')->with($notification);
+
+             }// end method
+
+public function CategoryDelete($id){
+
+    Category::findOrFail($id)->delete();
+
+    $notification = array(
+        'message' => 'Category Deleted Successfully',
+        'alert-type' => 'success'
+    );
+
+    return redirect()->back()->with($notification);
+
+} // end method 
+
 
 
 }

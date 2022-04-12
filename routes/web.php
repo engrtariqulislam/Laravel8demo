@@ -29,3 +29,6 @@ Route::get('/', function () {
 // Category Controller 
 Route::get('/category/all', [CategoryController::class, 'AllCat'])->name('all.category');
 Route::post('/category/add', [CategoryController::class, 'CategoryStore'])->name('store.category');
+Route::get('/edit/{id}', [CategoryController::class, 'CategoryEdit'])->name('category.edit');
+Route::get('/delete/{id}', [CategoryController::class, 'CategoryDelete'])->name('category.delete');
+Route::post('/update/{id}', [CategoryController::class, 'CategoryUpdate'])->name('category.update');
